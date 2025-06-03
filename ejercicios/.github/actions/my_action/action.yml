@@ -1,0 +1,35 @@
+name: "My Action"
+description: "My custom action"
+author: "Angel Roman"
+
+inputs:
+  my_input:
+    description: "My primer mensaje"
+    required: true
+    default: "Angel Roman"
+  my_input2:
+    description: "My segundo mensaje"
+    required: false
+    default: "Grandes Líderes"
+
+outputs:
+  saludo_completo:
+    description: "Mensaje de saludo completo"
+  primer_mensaje:
+    description: "El valor del primer mensaje de entrada"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Saludo
+      shell: bash
+      run: |
+        echo "Hello World"
+        echo "Hello ${{ inputs.my_input }}"
+        echo "Hello ${{ inputs.my_input2 }}"
+        echo "::set-output name=saludo_completo::Hello World, ${{ inputs.my_input }}, ${{ inputs.my_input2 }}"
+        echo "::set-output name=primer_mensaje::${{ inputs.my_input }}"
+
+branding:
+  icon: "terminal"
+  color: "blue"
